@@ -1,25 +1,29 @@
-### USB Band Decoder for Icom IC-905
+### Basic Teensy 4 based USB Band Decoder for Icom IC-905, IC-705 and others
 
-Description:
+This project is a minimal CI-V decoder for the IC-905, IC-705, IC-9700 and other similar USB equipped radios models.  Tested on the 905 and 705.  It is a cut down version of my 905/705 remote control repo removing the remote control head and control UI features.  This will run headless or with a simple small monitoring UI screen.  GPIO pins wil be set to preprogrammed patterns for band value and PTT is broke out per band.
 
-Project:
+A Teensy 4 (4.0 or 4.1) with appropriate buffered relay/Digital IO interfaces should fit into a small box to control antennas, amps and transverters.  This minimal version is transverter aware with a manual band switch (encoder, switches, touch UI) where, if a display is connected, it will show the dial frequency with any trnasverter band offsets added.  In the minimal configuration it will not send any messages to the radio.  
 
-This project is a CI-V decoder and remote control UI for the IC-905 and IC-705 control head.  A Teensy 4.0 or 4.1 USB host port connects with the radio's USB serial port CI-V bus channel 'A' to extract frequency data to operate band decode outputs on GPIO pins for antenna, amp, and transverter selection, and pass through PTT to designated GPIO pin(s) per band.  One way to describe this is a "PTT breakout box and band decoder".   I have only tested this with teIC-905 and IC-705 so far.  It should work with other modern CI-V radios like the IC-7300, IC-9100, and IC-9700.  Some minor features like GPS/Time function may need tweaking for older models.
+Future: A more enhanced configuration would read and save radio parameters prior to switching to a transverter band.  When switching back to a normal band, it will restore the saved parameters.  This feature is already working well in IC-905 decoder and my M5Stack (ESP32) based CIV decoder projects but on the ESP32 it only works with Bluetooth today, and the Teensy does nto have BT, nore do any of the radios besiode the IC-705. I have not got the USB host serial interface library to work reliably on the ESP32.  The Teensy version I can reliably run 3 serial channels over a single USB - debug, GPS data and CIV CAT data.  No Audio is available on the Teensy USB host so this is data only.  To run a digital program from a PC connected through this device (on teh main USB port), for audio you need to use the analog or LAN interface.  The primary ferture of this is band decoding and PTT breakout. I may add a BT interface to the Teensy board later.
 
-Transverter bands are supported with predefined ham bands from 160M to 122Ghz. with custom IF offset and dial calibration correction.  Equipped with a display and optional switches and/or encoders, it can act as a Transverter frequency and band select display.  An upcoming feature is to translate the radio frequency on the CI-V CAT bus to send the transverter frequency for logging and digital mode programs. This is likely more useful for radios like the IC-705 or 7300, 9100 that are often used as 28MHz or 144 and 432Mhz IF rigs but in theory the IC-905 can be a very stable and capable IF for 6M and band > 10Ghz also.  A PC can still be connected to the radio through this decoder for both CI-V and GPS NMEA data. Useful for running WSJT-X.
+Usage: A Teensy 4.0 or 4.1 USB host port connects with the radio's USB serial port CI-V bus channel 'A' to extract frequency data to operate band decode outputs on GPIO pins for antenna, amp, and transverter selection, and pass through PTT to designated GPIO pin(s) per band.  One way to describe this is a "PTT breakout box and band decoder".   I have only tested this with the IC-905 and IC-705 so far.  It should work with other modern CI-V radios like the IC-7300, IC-9100, and IC-9700.  
 
-It can run as a minimal headless package on a Teensy 4.0 for the purpose of a band decoder to operate antenna relays and power amps. Fit it with a RA8875 or RA8876 touchscreen display and optional encoder and buttons, you have a physical remote control head with a 4.3" (800x480px) or a 7" touchscreen (1024x600px).  A Teensy 4.1 is recommended for easier access to more GPIO pins and the USB host port pins without need for a T4.0 breakout board.  To try this out, cut a USB2 extension cable and crimp on a 5 pin flat connector on the USB2 female side cable and plug it into a T4.1.  
+Some minor features like GPS/Time function may need tweaking for older models.  A PC can be connected for debug and GPS data.  CAT data can be used but only when the decoder is configured to not send data to the radio (monitor mode only).  An enhanced version would turn off the PC side data flow while saving and restoring radio parameters, else the PC side program will get confused.  
 
-I leveraged my Teensy SDR project at https://github.com/K7MDL2/KEITHSDR sicne the hardware is the same for the display versoin usage. The UI is the same minus the spectrum window.  I will also be leveraging code from my RF Wattmeter and Band decoder project is at https://github.com/K7MDL2/RF-Power-Meter-V1.  This will permit configuring complex Band decoder IO using a Python desktop app over ethernet or USB connection.
+Transverter bands are supported with predefined ham bands from 160M to 122Ghz with custom IF offset and dial calibration correction.  Equipped with a display and optional switches and/or encoders, it can act as a Transverter frequency and band select display.  An wishlist feature is to translate the radio frequency on the CI-V CAT bus to send the transverter frequency for logging and digital mode programs. This is likely more useful for radios like the IC-705 or 7300, 9100 that are often used as 28MHz or 144 and 432Mhz IF rigs but in theory the IC-905 can be a very stable and capable IF for 6M and band > 10Ghz also.  A PC can still be connected to the radio through this decoder for both CI-V and GPS NMEA data. Useful for running WSJT-X.
 
-Here is a compact 4.3" SDR chassis with touch screen and 2 encoders that can double as a Remote controller and band decoder box.  A 7" is seen down the page.
+It can run as a minimal headless package on a Teensy 4.0 for the purpose of a band decoder to operate antenna relays and power amps. Fit it with a RA8875 or RA8876 touchscreen display and optional encoder and buttons, you have a physical remote control head with a 4.3" (800x480px) or a 7" touchscreen (1024x600px).  A Teensy 4.1 is recommended for easier access to more GPIO pins and the USB host port pins without need for a T4.0 breakout board.  To try this out, cut a USB2 extension cable and crimp on a 5 pin flat connector on the USB2 female side cable and plug it into a T4.1.  I plan to support a small OLED display option later.
+
+I leveraged my Teensy SDR project at https://github.com/K7MDL2/KEITHSDR since the hardware is the same. The UI is the same minus the spectrum window, soem conmtrol icons removed.  Over time I may leverage code from my RF Wattmeter and Band decoder project at https://github.com/K7MDL2/RF-Power-Meter-V1.  This will permit remotely configuring complex Band decoder IO patterns using a Python desktop app over ethernet or USB connection.
+
+Here is my compact 4.3" Teensy 4 SDR chassis with touch screen and 2 encoders that can double as a Remote controller and band decoder box.  A 7" chassis is seen down the page.
 
 ![Compact SDR chassis](https://github.com/K7MDL2/ICOM_IC-905_CIV/blob/main/Pictures/Compact%204.3inch%20Teensy%20SDR%20chassis.png)
 
 
 Why would some combo of knobs, buttons or touchscreen be useful you ask?
 
-Due to the limited front panel size and few buttons, several features require navigating multiple menu levels or at least 2-3 button pushes. Some examples of what a custom conmtrol head can do:
+Due to the limited radio front panel size and few buttons, several features require navigating multiple menu levels or at least 2-3 button pushes. Some examples of what a custom conmtrol head can do:
 
 - Put all combos of Mode (with data and without as appropriate) into a single list, scrollable with a quick encoder twist or button touches.  Same for filters, AGC, preamp, ATTN, tune rate.
 - Favorite memory buttons on front panel or in a 1 touch window
@@ -40,7 +44,7 @@ For full audio and serial control you can use the IC-905 LAN connection to a PC.
 
 Challenge:
 
-The IC-905 and other recent models do not have hardware outputs to select or key band specific antenna relays or amps.  There is only 1 PTT (aka SEND) port supporting many bands.  In the radio's config screens you can enable SEND for each band but on the wire there is no way to differentiate which band is active on the SEND port.  Further on some models like teh 905 and 705 many bands, like 144, 432, and 1296 on teh 905, are combined on 1 RF connector.  For the 905 the 2.3, 5.7, and 10G SMA connectors are separate.  Keying 1 of many possible amplifiers, or routing coax and band-specific PTT to a particular amp is a challenge.  While a PC could be used, many field operations do not use a PC so a small low power standalone solution is desired.
+The IC-905 and other recent models do not have hardware outputs to select or key band specific antenna relays or amps.  There is only 1 PTT (aka SEND) port supporting many bands.  In the radio's config screens you can enable SEND for each band but on the wire there is no way to differentiate which band is active on the SEND port.  Further on some models like the 905 and 705, many bands, like 144, 432, and 1296 on the 905, the RF outputs are combined on 1 RF connector.  For the 905 the 2.3, 5.7, and 10G SMA connectors are separate.  Keying 1 of many possible amplifiers, or routing coax and band-specific PTT to a particular amp is a challenge.  While a PC could be used, many field operations do not use a PC so a small low power standalone solution is desired.
 
 Solution:
 
@@ -64,11 +68,9 @@ Plug the radio USB cable into the T4 USB host port. Connect your amps and relays
 
 If using digital modes on a PC and audio is desired, use the LAN connection. It will operate at the same time as the USB port providing full control with serial, spectrum and audio. The USB connected box will then only handle the band decoding tasks. I use wfView at https://wfview.org/.
 
-This is in active devlopment as of July 2024 and tested on my bench with a IC-905 with the 10Ghz transverter. Feel free to open Issues on the GitHub repository. I am borrowing an IC-705 and will use both the USB and BT serial connections. The driving demand for the 705 is to use it as an IF rig, often mixed with its native bands so full direct and transverted frequency display and easy transverter band select is desired.  This needs a display.  The 905 can likely jsut use the headless packaging, maybe add a small 1" OLED display.  I can be USB powered.
+This is in active development as of Nov 2024 and tested on my bench with a IC-905 with the 10Ghz transverter and my IC-705. Feel free to open Issues on the GitHub repository. The driving demand for the 705 is to use it as an IF rig, often mixed with its native bands so full direct and transverted frequency display and easy transverter band select is desired.  This needs a display.  The 905 can likely just use the headless packaging, maybe add a small 1" OLED display.  I can be USB powered.
 
 ------------------------------------------------------------------------------------------------------------------
-
-This is work in progress, changes can happen fast!   You can scan the details below for the major work items checked in.   See the Wiki Page ![History Wiki Page Link](https://github.com/K7MDL2/ICOM_IC-905_CIV/wiki/Change-History-and-Details) for the dev history with operational and coding details.
 
 Here I am running the code on one of my Teensy SDR chassis (7" for now) since it has all the hardware needed.  I copy the extracted CI-V bus radio frequency into VFOA on the SDR chassis for display.  
 Showing stripped down SDR screen with live VFOA from CI-V bus (USB ch'A')
