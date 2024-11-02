@@ -1,6 +1,6 @@
 ### Basic Teensy 4 based USB Band Decoder for Icom IC-905, IC-705 and others
 
-This project is a minimal CI-V decoder for the IC-905, IC-705, IC-9700 and other similar USB equipped radios models.  Tested on the 905 and 705.  It is a cut down version of my 905/705 remote control repo removing the remote control head and control UI features.  This will run headless or with a simple small monitoring UI screen.  GPIO pins wil be set to preprogrammed patterns for band value and PTT is broke out per band.
+This project is a minimal CI-V decoder for the IC-905, IC-705, IC-9700 and other similar USB equipped radios models.  Tested on the 905 and 705.  It is a cut down version of my 905/705 remote control repo removing the remote control head and control UI features.  This will run headless or with a simple monitoring UI screen.  GPIO pins are set to preprogrammed patterns (configured in RadioConfig.h) for band value and PTT is broke out per band.
 
 A Teensy 4 (4.0 or 4.1) with appropriate buffered relay/Digital IO interfaces should fit into a small box to control antennas, amps and transverters.  This minimal version is transverter aware with a manual band switch (encoder, switches, touch UI) where, if a display is connected, it will show the dial frequency with any trnasverter band offsets added.  In the minimal configuration it will not send any messages to the radio.  
 
