@@ -41,6 +41,12 @@ OmniRig V1 RS-HFIQ compatible CAT control from an external PC.
                                   // CIV_ADDR_705    = 0xA4; // (Default-)address of the IC705
                                   // CIV_ADDR_905    = 0xAC; // (Default-)address of the IC905
 
+#define NO_SEND 0           // 1 = block transmission over CIV channel to radio. This prevents clashing with PC sent CAT commands.
+                            // The decoder will only monitor for key parameters such as frequency and PTT in order to perform the
+                            //  most basic band decoder and PTT breakout service.
+                            // 0 = allow send CIV data to radio (poll).  This can be used if no PC is connected to the CAT serial channel,
+                            //  or when a future feature saves and restores radio params on Xvtr band changes.
+
 #define RESET_MEMORY 1      // 1 will write the compiled defaults database values into memory losing all saved data.  
                             // 0 for normal use, operational values will be saved to storage (SD card if used or or EEPROM if used)
                             // During dev this is usually enabled to deal with changes in data structures 

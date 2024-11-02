@@ -55,7 +55,7 @@
 
 // Below are local project files
 #include "RadioConfig.h"        // Our main configuration file
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "CIV.h"
 #include "SDR_Data.h"
 #include "SDR_I2C_Encoder.h"    // See RadioConfig.h for more config including assigning an INT pin.                                          

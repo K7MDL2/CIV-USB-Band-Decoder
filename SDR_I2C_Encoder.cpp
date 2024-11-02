@@ -2,7 +2,7 @@
 //     SDR_I2C_Encoder.cpp
 //
 //#include "SDR_RA8875.h"
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 #include "SDR_I2C_Encoder.h"
 #include <i2cEncoderLibV2.h>

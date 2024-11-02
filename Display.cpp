@@ -1,7 +1,7 @@
 //
 //  Display.cpp
 //
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 #include "Display.h"
       

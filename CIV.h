@@ -9,7 +9,7 @@
 #define _CIV_H_
 
 #include <Arduino.h>
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 #include <CIVcmds.h>                    // https://github.com/K7MDL2/CIVmasterLib is my fork Icom CIV library https://github.com/WillyIoBrok/CIVmasterLib extended for the 905
 #include <CIVmaster.h>                  // CIVcmds.h is automatically included in addition

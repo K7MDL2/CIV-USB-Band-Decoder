@@ -6,7 +6,7 @@
 #define _SDR_DATA_RA8876_H_
 
 //#include "RadioConfig.h"
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 
 //
 // NOTE!!!!

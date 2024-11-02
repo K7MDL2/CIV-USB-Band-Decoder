@@ -6,7 +6,7 @@
 //  SD card related support
 //
 //
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 
 bool Open_SD_cfgfile(void);

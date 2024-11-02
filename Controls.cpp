@@ -3,7 +3,7 @@
 //
 
 #include "RadioConfig.h"
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include <CIVmaster.h>
 #include "Controls.h"
 

@@ -7,7 +7,7 @@
 //			use this function rather than setFreq() since this tracks VFOs and updates their memories.
 //
 
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 #include "Tuner.h"
 

@@ -5,7 +5,7 @@
 //   Process CIV messages sent and received
 //
 
-#include "ICOM_IC-905_CIV.h"
+#include "CIV-USB-Band-Decoder.h"
 #include "RadioConfig.h"
 #include "CIV.h"
 
